@@ -1,0 +1,71 @@
+@import './bootstrap-variables';
+@import './bootstrap-custom';
+
+body {
+  padding: 20px;
+}
+
+footer {
+  text-align: right;
+}
+
+.options {
+  margin: 10px auto;
+}
+
+.memo-title {
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+#box1,
+#box2,
+#box3,
+#box4,
+#box5,
+#box7
+{
+  width: 100px;
+  height: 100px;
+  background-color: green;
+  border-radius: 6px;
+}
+
+.box6 {
+  width: 100px;
+  height: 100px;
+  background-color: green;
+  display: inline-block;
+  margin-right: 5px;
+  border-radius: 6px;
+  border: solid 1px #fff;
+}
+
+.box6-1 {
+  z-index: 1;
+}
+.box6-2 {
+  z-index: 2;
+}
+.box6-3 {
+  z-index: 3;
+}
+.box6-4 {
+  z-index: 4;
+}
+.box6-5 {
+  z-index: 5;
+}
+
+#btn1,
+#btn2,
+#btn3,
+#btn4,
+#btn5,
+#btn6,
+#btn7
+{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: block;
+}

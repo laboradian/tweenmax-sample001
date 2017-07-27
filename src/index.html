@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"  >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--  Font Awesome の CDN  -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <title>TweenMax を使ったサンプルページ001</title>
+</head>
+
+<body>
+
+  <header>
+    <h1>TweenMax を使ったサンプルページ001</h1>
+  </header>
+
+  <div class="well">
+    <p>TweenMax について</p>
+    <ul>
+      <li>HTML要素に対してアニメーションすることができる(Canvasは使わない)。</li>
+    </ul>
+
+    <p>参考</p>
+    <ul>
+      <li><a href="https://greensock.com/gsap">GSAP, the standard for JavaScript HTML5 animation | GreenSock</a></li>
+      <li><a href="https://greensock.com/docs/TimelineMax">GreenSock | Docs | TimelineMax</a></li>
+    </ul>
+  </div>
+
+  <h2>TweenMax</h2>
+
+  <div class="panel panel-success">
+    <div class="panel-heading">TweenMax.to()</div>
+    <div class="panel-body">
+      <p>特定の目的となる値に向かってアニメーションする TweenMax インスタンスを作成する静的メソッド</p>
+      <p>ref. <a href="https://greensock.com/docs/TweenMax/static.to()">GreenSock | Docs | TweenMax | static.to()</a></p>
+      <hr>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <div id="box1"></div>
+          <div class="options">
+            <label class="radio-inline">
+              <input type="radio" name="rotateDirection1" id="rotateDirection1_cw" value="1" checked> 時計回り
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="rotateDirection1" id="rotateDirection1_ccw" value="2"> 反時計回り
+            </label>
+          </div>
+          <button id="btn1" type="button">開始</button>
+        </div>
+        <div class="col-xs-6">
+          Code:
+          <pre><code>const rd = $('input[name="rotateDirection1"]:checked').val();
+TweenMax.to('#box1', 2, {
+  startAt: { rotation: 0 }, // 何度も実行するために必要
+  left: 400,
+  rotation: (rd === '1') ? '360_cw' : '360_ccw',
+  ease: Bounce.easeOut
+});</code></pre>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <div id="box2"></div>
+          <button id="btn2" type="button">開始</button>
+        </div>
+        <div class="col-xs-6">
+          Code:
+          <pre><code>TweenMax.to('#box2', 1, {
+  x: 500,
+  opacity: 0,
+  startAt: {
+    x: 0,
+    opacity: 1
+  }, // 何度も実行するために必要
+});</code></pre>
+        </div>
+      </div>
+      <hr>
+
+      <p class="memo-title">メモ</p>
+      <ul>
+        <li>動作が終わると、元には戻らない。</li>
+        <li><code>startAt</code>で指定するのは、あくまで <strong>動作の開始時点</strong> のプロパティである。</li>
+      </ul>
+
+    </div>
+  </div>
+
+  <div class="panel panel-success">
+    <div class="panel-heading">TweenMax.set()</div>
+    <div class="panel-body">
+      <p>目的のオブジェクトのプロパティを直ちにセットする。</p>
+      <p><code>TweenMax.to()</code> の前で使うとよさそう。</p>
+      <p>ref. <a href="https://greensock.com/docs/TweenMax/static.set()">GreenSock | Docs | TweenMax | static.set()</a></p>
+      <hr>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <div id="box3"></div>
+          <button id="btn3" type="button">開始</button>
+        </div>
+        <div class="col-xs-6">
+          Code:
+          <pre><code>TweenMax.set('#box3', {
+  x: 200,
+  opacity: .5
+});</code></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="panel panel-success">
+    <div class="panel-heading">TweenMax.from()</div>
+    <div class="panel-body">
+      <p>特定の値から初期値に向かってアニメーションする TweenMax インスタンスを作成する静的メソッド</p>
+      <p>ref. <a href="https://greensock.com/docs/TweenMax/static.from()">GreenSock | Docs | TweenMax | static.from()</a></p>
+      <hr>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <div id="box4"></div>
+          <button id="btn4" type="button">開始</button>
+        </div>
+        <div class="col-xs-6">
+          Code:
+          <pre><code>TweenMax.from('#box4', 1, {
+  x: 500
+});</code></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="panel panel-success">
+    <div class="panel-heading">TweenMax.fromTo()</div>
+    <div class="panel-body">
+      <p>特定の値から特定の値に向かってアニメーションする TweenMax インスタンスを作成する静的メソッド</p>
+      <p>ref. <a href="https://greensock.com/docs/TweenMax/static.fromTo()">GreenSock | Docs | TweenMax | static.fromTo()</a></p>
+      <hr>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <div id="box5"></div>
+          <button id="btn5" type="button">開始</button>
+        </div>
+        <div class="col-xs-6">
+          Code:
+          <pre><code>TweenMax.fromTo('#box5', 1, {
+  width: '100%',
+  x: 500
+}, {
+  width: 100,
+  x: 0
+});</code></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="panel panel-success">
+    <div class="panel-heading">TweenMax.staggerTo()</div>
+    <div class="panel-body">
+      <p>ターゲットとなる複数のオブジェクトに対して、共通の目的値に向かってアニメーションする。</p>
+      <p>ref. <a href="https://greensock.com/docs/TweenMax/static.staggerTo()">GreenSock | Docs | TweenMax | static.staggerTo()</a></p>
+      <hr>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="box6 box6-1"></div>
+          <div class="box6 box6-2"></div>
+          <div class="box6 box6-3"></div>
+          <div class="box6 box6-4"></div>
+          <div class="box6 box6-5"></div>
+          <div>
+            <button id="btn6" type="button">開始</button>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          Code:
+          <pre><code>TweenMax.staggerTo(".box6", 1, {
+  rotation: '+=360',
+  x: '+=100'
+}, 0.5);</code></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <h2>TimelineMax</h2>
+  <p>アニメーションをつなげる</p>
+  <p>ref. <a href="https://greensock.com/docs/TimelineMax">GreenSock | Docs | TimelineMax</a></p>
+
+  <div class="panel panel-success">
+    <div class="panel-heading">その1</div>
+    <div class="panel-body">
+
+      <div class="row">
+        <div class="col-xs-6">
+          <div id="box7"></div>
+          <button id="btn7" type="button">開始</button>
+        </div>
+        <div class="col-xs-6">
+          Code:
+          <pre><code>const elm = document.querySelector('#box7');
+(new TimelineMax())
+  .to(elm, 1, { x:  200, backgroundColor: 'black', opacity: .5 })
+  .to(elm, 2, { y: -200, backgroundColor: 'blue',  opacity: 1  })
+  .to(elm, 1, { x:    0, backgroundColor: 'red',   opacity: .5 })
+  .to(elm, 2, { y:    0, backgroundColor: 'green', opacity: 1  });</code></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="well">
+    <p>ソースコードはこちら</p>
+    <ul>
+      <li><a href="https://github.com/laboradian/tweenmax-sample001">laboradian/tweenmax-sample001</a></li>
+    </ul>
+  </div>
+
+  <hr>
+  <footer>© 2017 <a href="http://laboradian.com/">Laboradian</a></footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+  <script src="js/main.js" charset="utf-8"></script>
+</body>
+</html>
